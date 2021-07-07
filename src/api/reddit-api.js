@@ -14,7 +14,7 @@ export const getSubredditPosts = async (subreddit) => {
     return json.data.children.map((post) => post.data);
 }
 
-// Gets comments from specific post
+// CURRENT NOT IMPLIMENTED ==== Gets comments from specific post
 export const getComments = async (permalink) => {
     const response = await fetch(`${API_ROOT}${permalink}.json`);
     const json = await response.json();

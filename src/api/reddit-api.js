@@ -1,8 +1,8 @@
 export const API_ROOT = 'https://www.reddit.com';
 
 // List of subreddits
-export const getSubredditList = async () => {
-    const response = await fetch(`${API_ROOT}`/getSubredditList.json);
+export const getSubreddits = async () => {
+    const response = await fetch(`${API_ROOT}`/getSubreddits.json);
     const json = await response.json();
     return json.data.childres.map((subreddit) => subreddit.data);
 }

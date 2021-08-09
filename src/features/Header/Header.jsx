@@ -3,6 +3,7 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { FaReddit } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchTerm } from '../../store/redditSlice';
+import './Header.css';
 
 const Header = () => {
   const [searchTermLocal, setSearchTermLocal] = useState('');

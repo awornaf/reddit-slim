@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import { fetchSubreddits, selectSubreddits } from '../../store/subredditSlice';
 import { setSelectedSubreddit, selectSelectedSubreddit} from '../../store/redditSlice';
+import './Subreddits.css';
 
 const Subreddits = () => {
   const dispatch = useDispatch();

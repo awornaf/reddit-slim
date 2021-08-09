@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import moment from 'moment';
 import Card from '../Card/Card';
 import { TiArrowUpOutline, TiArrowUpThick, TiArrowDownOutline, TiArrowDownThick } from 'react-icons/ti';
+import './Post.css';
+import shortenNumber from '../../utils/shortenNumber';
 
 const Post = (props) => {
     const [score, setScore] = useState(0);
@@ -63,7 +65,8 @@ const Post = (props) => {
                             {renderDownvote()} 
                             </button>
                             <p className={`post-score ${getVoteType()}`}>
-                        </p>
+                                {shortenNumber(post.ups,1)}
+                            </p>
                     </div>
                     <div className='post-container'>
                         <h3 className='post-title'>{post.title}</h3>

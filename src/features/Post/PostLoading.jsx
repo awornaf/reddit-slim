@@ -1,12 +1,8 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-
-import {
-  TiArrowUpOutline,
-  TiArrowDownOutline,
-  TiMessage,
-} from 'react-icons/ti';
+import { TiArrowUpOutline, TiArrowDownOutline} from 'react-icons/ti';
 import getRandomNumber from '../../utils/getRandomNumber';
+import './PostLoading.css';
 
 const PostLoading = () => {
   return (

@@ -5,8 +5,7 @@ import { AnimatedList } from 'react-animated-list';
 import Post from '../Post/Post';
 import getRandomNumber from '../../utils/getRandomNumber';
 import PostLoading from '../Post/PostLoading';
-
-
+import './Home.css';
 
 
 const Home = () =>{
@@ -16,12 +15,12 @@ const Home = () =>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPosts(selectedSubreddit));}, [selectedSubreddit, dispatch]);
+        dispatch(fetchPosts(selectedSubreddit));}, [dispatch, selectedSubreddit]);
 
     if(isLoading) {
         return (
             <AnimatedList animation='zoom'>
-                {Array(getRandomNumber(3, 10)).fill(<PostLoading />)}
+                {Array(getRandomNumber(3, 15)).fill(<PostLoading />)}
             </AnimatedList>
         )
     }
@@ -50,7 +49,7 @@ const Home = () =>{
 
     return (
         <>
-            {posts.map((post, index) => (
+            {posts.map((post) => (
                 <Post key={post.id} post={post}/>
             ))}
         </>

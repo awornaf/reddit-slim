@@ -4,7 +4,7 @@ import { getSubredditPosts } from '../api/reddit-api';
 const initialState = {
     posts: [],
     searchTerm: '',
-    selectedSubreddit: '/r/cyberpunk/',
+    selectedSubreddit: '/r/earthporn/',
     isLoading: false,
     error: false,
 };
@@ -53,10 +53,15 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
     try{
         dispatch(startGetPosts());
         const posts = await getSubredditPosts(subreddit);
-        const postsWithMetaData = posts.map((post) => ({
-            ...post,
-        }))
-        dispatch(getPostsSuccess(postsWithMetaData));
+         const mappedPosts = posts.map((post) => ({
+             id: post.id,
+             title: post.title,
+             author: post.author,
+             subreddit: post.subreddit,
+             url: post.url,
+             created_utc: post.created_utc,
+         }));
+        dispatch(getPostsSuccess(mappedPosts));
     } catch (e) {
         dispatch(getPostsFailed());
     }
@@ -71,4 +76,5 @@ export const selectFilteredPosts = createSelector([selectPosts, selectSearchTerm
             return posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
         }
         return posts;
-    });
+    }
+);

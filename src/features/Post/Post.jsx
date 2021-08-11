@@ -7,7 +7,7 @@ import shortenNumber from '../../utils/shortenNumber';
 
 const Post = (props) => {
     const [score, setScore] = useState(0);
-    const post = props;
+    const post = props.post;
 
     const onHandleVote = (newScore) => {
         if(newScore === score){

@@ -15,10 +15,11 @@ const Home = () =>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPosts(selectedSubreddit));}, [dispatch, selectedSubreddit]);
+        dispatch(fetchPosts(selectedSubreddit));
+    },[dispatch, selectedSubreddit]);
 
     if(isLoading) {
-        return (
+        return ( 
             <AnimatedList animation='zoom'>
                 {Array(getRandomNumber(3, 15)).fill(<PostLoading />)}
             </AnimatedList>
@@ -50,7 +51,10 @@ const Home = () =>{
     return (
         <>
             {posts.map((post) => (
-                <Post key={post.id} post={post}/>
+            <Post
+                key={post.id}
+                post={post}
+                />
             ))}
         </>
     );

@@ -49,19 +49,29 @@ export const {
 
 export default redditSlice.reducer;
 
+// Redux Thunk that gets posts from a subreddit.
 export const fetchPosts = (subreddit) => async (dispatch) => {
     try{
         dispatch(startGetPosts());
         const posts = await getSubredditPosts(subreddit);
-         const mappedPosts = posts.map((post) => ({
-             id: post.id,
-             title: post.title,
-             author: post.author,
-             subreddit: post.subreddit,
-             url: post.url,
-             created_utc: post.created_utc,
-         }));
-        dispatch(getPostsSuccess(mappedPosts));
+        //  const mappedPosts = posts.map((post) => ({
+        //      id: post.id,
+        //      title: post.title,
+        //      author: post.author,
+        //      subreddit: post.subreddit,
+        //      url: post.url,
+        //      created_utc: post.created_utc,
+        //  }));
+        // dispatch(getPostsSuccess(mappedPosts));
+            // We are adding showingComments and comments as additional fields to handle showing them when the user wants to. We need to do this because we need to call another API endpoint to get the comments for each post.
+    const postsWithMetadata = posts.map((post) => ({
+        ...post,
+        showingComments: false,
+        comments: [],
+        loadingComments: false,
+        errorComments: false,
+      }));
+      dispatch(getPostsSuccess(postsWithMetadata));
     } catch (e) {
         dispatch(getPostsFailed());
     }
@@ -70,11 +80,15 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
 const selectPosts = (state) => state.reddit.posts;
 const selectSearchTerm = (state) => state.reddit.searchTerm;
 export const selectSelectedSubreddit = (state) => state.reddit.selectedSubreddit;
-export const selectFilteredPosts = createSelector([selectPosts, selectSearchTerm],
+export const selectFilteredPosts = createSelector(
+    [selectPosts, selectSearchTerm],
     (posts, searchTerm) => {
-        if (searchTerm !== ''){
-            return posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
-        }
-        return posts;
+      if (searchTerm !== '') {
+        return posts.filter((post) =>
+          post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+  
+      return posts;
     }
 );

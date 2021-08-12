@@ -16,7 +16,7 @@ const Home = () =>{
 
     useEffect(() => {
         dispatch(fetchPosts(selectedSubreddit));
-    },[dispatch, selectedSubreddit]);
+    },[selectedSubreddit]);
 
     if(isLoading) {
         return ( 

@@ -56,7 +56,9 @@ const Post = (props) => {
                             >
                             {renderUpvote()} 
                             </button>
-                        
+                            <p className={`post-score ${getVoteType()}`}>
+                                {shortenNumber(post.ups,1)}
+                            </p>
                         <button
                             type='button'
                             className={`icon-action-button downvote ${score === -1 && 'active'}`}
@@ -64,14 +66,16 @@ const Post = (props) => {
                             >
                             {renderDownvote()} 
                             </button>
-                            <p className={`post-score ${getVoteType()}`}>
-                                {shortenNumber(post.ups,1)}
-                            </p>
+                            
                     </div>
                     <div className='post-container'>
-                        <h3 className='post-title'>{post.title}</h3>
+                        <h3 className='post-title'>
+                            <a href={"https://www.reddit.com"+post.permalink} target="_blank" rel="noreferrer">{post.title}</a>
+                        </h3>
                         <div className='post-img-container'>
-                            <img src={post.url} alt='' className='post-img'/>
+                            <a href={post.url} target="_blank" rel="noreferrer">
+                                <img src={post.url} alt='' className='post-img'/>
+                            </a>
                         </div>
                         <div className='post-details'>
                             <span className='author-username'>{post.author}</span>

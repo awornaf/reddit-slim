@@ -54,22 +54,9 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
     try{
         dispatch(startGetPosts());
         const posts = await getSubredditPosts(subreddit);
-        //  const mappedPosts = posts.map((post) => ({
-        //      id: post.id,
-        //      title: post.title,
-        //      author: post.author,
-        //      subreddit: post.subreddit,
-        //      url: post.url,
-        //      created_utc: post.created_utc,
-        //  }));
-        // dispatch(getPostsSuccess(mappedPosts));
-            // We are adding showingComments and comments as additional fields to handle showing them when the user wants to. We need to do this because we need to call another API endpoint to get the comments for each post.
+
     const postsWithMetadata = posts.map((post) => ({
-        ...post,
-        showingComments: false,
-        comments: [],
-        loadingComments: false,
-        errorComments: false,
+        ...post
       }));
       dispatch(getPostsSuccess(postsWithMetadata));
     } catch (e) {
